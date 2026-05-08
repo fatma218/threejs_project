@@ -7,6 +7,9 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { loadRoom, roomObjects } from "./room.js";
 import { loadCharacter, updateCharacter } from "./models.js";
+
+import { initDesigner } from "./designer.js";
+
 import { initStory, updateStory } from "./story.js";
 import { initAR } from "./ar.js";
 import { initVR } from "./vr.js";
@@ -230,12 +233,13 @@ async function init() {
     await Promise.all([loadRoom(scene), loadCharacter(scene)]);
 
     // Init AR / VR
+
     initAR(renderer);
     initVR(renderer);
 
     // Init story (Phase 2)
     initStory();
-
+    initDesigner();
     // Cacher le loading
     const loading = document.getElementById("loading");
     if (loading) {
